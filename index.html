@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #004782;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #0367A6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFDD57;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: calc(100vh - 150px); /* Para compensar o header e o footer */
+            padding: 15px;
+            padding-top: 75px; /* Para compensar o header fixo */
+            flex-wrap: wrap;
+        }
+
+        .carousel-row {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+        }
+
+        .carousel-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px; /* Espaço inferior para separação entre carrosséis */
+        }
+
+        .carousel-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel img {
+            width: 25vw;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
+        .carousel img.active {
+            opacity: 1;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            margin-left: 15vh;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .services h2 {
+            width: 100%;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .services ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .services ul li {
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        aside {
+            flex: 1;
+            text-align: center;
+            max-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 20px; /* Espaço entre o aside e o carrossel */
+            margin-top: 10px; /* Espaço entre o aside e o header */
+	    margin-bottom: 15px;
+        }
+
+        aside h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        aside p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input[type="text"],
+        form input[type="email"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #FFDD57;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #FFC107;
+        }
+
+        article img {
+            width: 15vw;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #0367A6;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title">PET HOME</div>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Serviço</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Cadastre-se</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="carousel-row">
+            <div class="carousel-container">
+                <div class="carousel-title">Brinquedos para seu animal</div>
+                <div class="carousel">
+                    <img src="https://i.ibb.co/TWhDXK8/brinquedos-1.jpg" class="active" alt="Imagem 1">
+                    <img src="https://i.ibb.co/ZgzyvJs/brinquedos-2.png" alt="Imagem 2">
+                    <img src="https://i.ibb.co/M119MR4/brinquedo-3.jpg" alt="Imagem 3">
+                    <img src="https://i.ibb.co/hfQz4Pw/brinquedo-4.png" alt="Imagem 4">
+                    <img src="https://i.ibb.co/Y0RP2ZB/brinquedo-5.png" alt="Imagem 5">
+                </div>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-title">Rações para seu pet</div>
+                <div class="carousel">
+                    <img src="https://i.ibb.co/X3CbHvJ/1.jpg.jpg" class="active" alt="Imagem 1">
+                    <img src="https://i.ibb.co/bLQFLGg/2.png" alt="Imagem 2">
+                    <img src="https://i.ibb.co/j4007hR/3.png" alt="Imagem 3">
+                    <img src="https://i.ibb.co/W2CLp2m/5.png" alt="Imagem 4">
+                    <img src="https://i.ibb.co/XzZYXk3/6.jpg" alt="Imagem 5">
+                </div>
+            </div>
+            <div class="services">
+                <h2>Serviços</h2>
+                <ul>
+                    <li>Banho e Tosa</li>
+                    <li>Remédios</li>
+                    <li>Exames</li>
+                    <li>Outros</li>
+                </ul>
+            </div>
+        </div>
+        <aside>
+            <h2>Inscreva-se agora na Pet Home</h2>
+            <p>Descubra na Pet Home tudo para seu pet com qualidade e cuidado. Temos alimentos, brinquedos e acessórios essenciais para o bem-estar do seu companheiro. Cadastre-se para descontos exclusivos e atendimento personalizado. Venha para a Pet Home e faça dos momentos com seu pet ainda mais especiais.</p>
+            <form>
+                <input type="text" placeholder="Nome">
+                <input type="email" placeholder="Email">
+                <input type="submit" value="Enviar">
+            </form>
+            <article>
+                <img src="https://vetcvvp.com.br/wp-content/uploads/2022/11/cachorro-e-gato-home.png" alt="Cachorro e Gato">
+            </article>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2024 Pet Home. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(carousel => {
+            const images = carousel.querySelectorAll('img');
+            let currentIndex = 0;
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000);
+        });
+    </script>
+</body>
+</html>
